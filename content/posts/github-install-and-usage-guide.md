@@ -2,7 +2,7 @@
 date = '2026-06-05T10:00:00+05:00'
 title = 'GitHub — Full Install & Usage Guide with All Commands'
 description = 'Complete guide to installing Git, configuring GitHub, SSH keys, cloning repos, branching, committing, pushing, and collaborating on GitHub.'
-tags = ['github', 'git', 'version-control', 'ssh', 'devtools']
+tags = ['github', 'git', 'versiion-control', 'ssh', 'devtools']
 categories = ['GitHub', 'Tutorials']
 ShowToc = true
 ShowReadingTime = true
