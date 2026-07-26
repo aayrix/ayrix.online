@@ -1,4 +1,4 @@
-baseURL = "https://ayrix.online/"
+baseURL = 'https://ayrix.online/'
 languageCode = "en-us"
 title = "Aayrix"
 theme = "hugo-PaperMod"
