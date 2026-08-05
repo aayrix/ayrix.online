@@ -5,9 +5,7 @@ ShowToc = false
 +++
 
 <div class="page-intro">
-
-**Aliyan** — Computer Science student at FAST NUCES. For inquiries, collaboration requests, or technical questions, please use the channels below. I aim to respond within 48 hours on business days.
-
+**Aliyan** — Artificial Intelligence student at FAST NUCES. For inquiries, collaboration requests, or technical questions, please use the channels below. I aim to respond within 48 hours on business days.
 </div>
 
 <div class="contact-grid">

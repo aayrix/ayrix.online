@@ -14,11 +14,11 @@ title = "Home"
 <h1>AYRIX Tech Blog</h1>
 
 <p class="hero-subtitle">
-Practical technology guides, tutorials, and insights for developers, students, and curious minds.
+Practical, production-ready technology guides for developers, students, and lifelong learners.
 </p>
 
 <p class="hero-description">
-Explore Linux, AI, programming, web development, Git, GitHub, and modern developer tools through clear, practical, and easy-to-follow guides.
+In-depth, step-by-step tutorials covering Linux, AI, programming, web development, Git, GitHub, and modern developer tooling — written to be clear, complete, and easy to follow.
 </p>
 
 <div class="home-cta-actions">
@@ -78,7 +78,7 @@ Practical knowledge, technical guides, and useful resources to help you learn, b
 <span class="home-card-title">Tech Blogs & Guides</span>
 
 <span class="home-card-desc">
-Explore practical tutorials, technical guides, installation instructions, and step-by-step solutions.
+Practical tutorials, technical guides, installation instructions, and step-by-step solutions.
 </span>
 
 </a>
@@ -96,7 +96,7 @@ Explore practical tutorials, technical guides, installation instructions, and st
 <span class="home-card-title">Topics & Tags</span>
 
 <span class="home-card-desc">
-Find articles by technology, programming language, operating system, and development tools.
+Find articles by technology, programming language, operating system, and development tool.
 </span>
 
 </a>
@@ -132,7 +132,7 @@ Browse articles organized into Linux, AI, programming, web development, Git, and
 <span class="home-card-title">About AYRIX</span>
 
 <span class="home-card-desc">
-Learn more about AYRIX, the ideas behind the platform, and the technology journey behind it.
+Learn about the ideas behind AYRIX and the journey that shaped it.
 </span>
 
 </a>
@@ -184,7 +184,7 @@ Arch Linux Installation
 </span>
 
 <span class="home-card-desc">
-Learn manual installation, partitioning, bootloader configuration, and system setup.
+Manual installation, partitioning, bootloader configuration, and system setup.
 </span>
 
 </a>
@@ -201,7 +201,7 @@ Git & GitHub
 </span>
 
 <span class="home-card-desc">
-Learn repository management, Git configuration, SSH authentication, and practical workflows.
+Repository management, Git configuration, SSH authentication, and practical workflows.
 </span>
 
 </a>
@@ -218,7 +218,7 @@ GitHub CLI
 </span>
 
 <span class="home-card-desc">
-Manage repositories, issues, pull requests, and GitHub workflows directly from your terminal.
+Manage repositories, issues, pull requests, and GitHub workflows from your terminal.
 </span>
 
 </a>
@@ -235,7 +235,7 @@ Hugo Static Websites
 </span>
 
 <span class="home-card-desc">
-Build, configure, deploy, and host fast static websites using Hugo and GitHub Pages.
+Build, configure, deploy, and host fast static websites with Hugo and GitHub Pages.
 </span>
 
 </a>
@@ -257,7 +257,7 @@ Welcome to AYRIX
 </span>
 
 <span class="home-card-desc">
-Discover the purpose of AYRIX, what you'll find here, and the future direction of the platform.
+The purpose of AYRIX, what you'll find here, and where the platform is headed.
 </span>
 
 </a>
@@ -287,7 +287,7 @@ System installation, configuration, and troubleshooting
 
 <li class="topic-pill">
 <strong>AI</strong>
-Artificial intelligence, tools, experiments, and practical applications
+Artificial intelligence concepts, tools, and practical applications
 </li>
 
 <li class="topic-pill">
@@ -387,7 +387,7 @@ Share
 </span>
 
 <span class="home-card-desc">
-Share useful knowledge and technical experiences with the wider developer community.
+Share useful knowledge and technical experience with the wider developer community.
 </span>
 
 </div>

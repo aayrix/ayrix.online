@@ -1,27 +1,22 @@
 +++
 title = "About Me"
-description = "About Aliyan — Computer Science student at FAST NUCES, developer, and creator of Aayrix technical documentation."
+description = "About Aliyan — Artificial Intelligence student at FAST NUCES, developer, and creator of Aayrix technical documentation."
 ShowToc = false
 +++
 
 <div class="about-profile">
-
 <div class="about-profile-text">
 
 ## Aliyan
-
-**Computer Science Student · FAST NUCES**
+**Artificial Intelligence Student · FAST NUCES**
 
 I am a motivated and curious developer who is always eager to learn new skills, explore emerging technologies, and push beyond my comfort zone. I believe growth comes from consistent practice, building real projects, and sharing what I learn with others.
 
 </div>
-
 </div>
 
 <div class="page-intro">
-
 This blog — **Aayrix** — is where I document that journey. I write the guides I wish I had when I was starting out: clear, complete, and ready to follow step by step.
-
 </div>
 
 ## About Me
