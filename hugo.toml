@@ -1,19 +1,37 @@
-baseURL = 'https://ayrix.online/'
+baseURL = "https://ayrix.online/"
 languageCode = "en-us"
-title = "Aayrix"
+title = "AYRIX"
 theme = "hugo-PaperMod"
+
 summaryLength = 30
 enableRobotsTXT = true
-copyright = "© {year} Aayrix. All rights reserved."
+copyright = "© {year} AYRIX. All rights reserved."
 
 [pagination]
 pagerSize = 5
 
 [params]
 env = "production"
-description = "Aayrix — technical documentation and developer guides by Aliyan, an Artificial Intelligence student at FAST NUCES. In-depth, copy-ready tutorials on Linux, GitHub, Hugo, and modern developer tooling."
-keywords = ["Linux", "GitHub", "Hugo", "developer tutorials", "technical documentation", "Arch Linux", "Ubuntu", "DevOps", "Static Site Generators"]
+
+description = "AYRIX — technical documentation and developer guides by Aliyan, an Artificial Intelligence student at FAST NUCES. Practical, copy-ready tutorials on Linux, GitHub, Hugo, and modern developer tooling."
+
+keywords = [
+  "AYRIX",
+  "Linux",
+  "GitHub",
+  "Hugo",
+  "developer tutorials",
+  "technical documentation",
+  "Arch Linux",
+  "Ubuntu",
+  "DevOps",
+  "static site generators"
+]
+
+author = "Aliyan"
+
 defaultTheme = "dark"
+
 ShowReadingTime = true
 ShowShareButtons = true
 ShowPostNavLinks = true
@@ -21,15 +39,27 @@ ShowBreadCrumbs = true
 ShowCodeCopyButtons = true
 ShowWordCount = true
 ShowRssButtonInSectionTermList = true
+
 mainSections = ["posts"]
-author = "Aliyan"
+
+# -------------------------
+# Home page
+# -------------------------
 
 [params.homeInfoParams]
-Title = "Technical Documentation & Developer Guides"
-Content = "Hi, I'm **Aliyan** — an Artificial Intelligence student at FAST NUCES and the author behind [Aayrix](https://github.com/aayrix). I write clear, production-ready tutorials on Linux, GitHub, and static site engineering, focused on practical solutions over theory."
+Title = "AYRIX — Technical Documentation & Developer Guides"
 
-[params.footer]
-hideCopyright = false
+Content = """
+Hi, I'm **Aliyan** — an Artificial Intelligence student at FAST NUCES and the creator of **AYRIX**.
+
+I write clear, practical, and copy-ready technical guides covering **Linux, GitHub, Hugo, static websites, developer tools, and modern development workflows**.
+
+My goal is simple: make technical problems easier to understand and solutions easier to reproduce.
+"""
+
+# -------------------------
+# Social links
+# -------------------------
 
 [[params.socialIcons]]
 name = "github"
@@ -38,6 +68,10 @@ url = "https://github.com/aayrix"
 [[params.socialIcons]]
 name = "email"
 url = "mailto:aliyanniazi370@gmail.com"
+
+# -------------------------
+# Main navigation
+# -------------------------
 
 [[menu.main]]
 identifier = "home"
@@ -75,8 +109,21 @@ name = "Contact"
 url = "/contact/"
 weight = 6
 
+# -------------------------
+# Footer
+# -------------------------
+
+[params.footer]
+hideCopyright = false
+
+# -------------------------
+# Markdown / HTML
+# -------------------------
+
 [markup]
-  [markup.goldmark.renderer]
-    unsafe = true
-  [markup.highlight]
-    noClasses = false
+
+[markup.goldmark.renderer]
+unsafe = true
+
+[markup.highlight]
+noClasses = false
