@@ -1,3 +1,3 @@
 User-agent: *
 Disallow:
-Sitemap: https://aayrix.github.io/sitemap.xml
+Sitemap: https://ayrix.online/sitemap.xml
