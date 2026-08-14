@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap');
 
-:root { --theme:#f4f1e8; --entry:#fffdf8; --primary:#18261d; --secondary:#647067; --content:#344139; --border:#d9ddcf; --code-bg:#1a2920; --brand:#678d28; --brand-2:#d85e36; }
+:root, html[data-theme=dark], html[data-theme=light] { --theme:#f7f5ef; --entry:#fffefb; --primary:#18291e; --secondary:#59695f; --content:#34463b; --border:#d5ddd0; --code-bg:#18261d; --brand:#557d24; --brand-2:#c95532; }
 html, body { background:var(--theme); }
 body { color:var(--content); font-family:'DM Sans',sans-serif; background:linear-gradient(120deg,rgba(215,255,79,.16),transparent 30%),linear-gradient(305deg,rgba(216,94,54,.08),transparent 28%),var(--theme); }
 body::after { content:''; position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.32; background-image:radial-gradient(#7c8a7f .6px,transparent .7px); background-size:9px 9px; }
@@ -10,19 +10,21 @@ body::after { content:''; position:fixed; inset:0; z-index:-1; pointer-events:no
 .logo a::before { content:''; display:block; width:34px; height:34px; flex:0 0 34px; background:url('/favicon.svg') center/contain no-repeat; }
 .logo a:has(img)::before { display:none; }
 .logo a img { width:34px; height:34px; border-radius:10px; box-shadow:0 6px 18px rgba(46,68,38,.16); }
-.logo a::after,.menu a::after { display:none; }
+.logo a { font-size:0; }
+.logo a::after { content:'AYRIX'; display:block; color:var(--primary); font-size:1.12rem; font-weight:700; letter-spacing:.08em; }
+.menu a::after { display:none; }
 .logo-switches { display:none; }
 .menu { gap:.18rem; }
 .menu a { padding:.48rem .72rem; border-radius:999px; color:var(--secondary); font-size:.75rem; font-weight:700; letter-spacing:.04em; }
 .menu a:hover,.menu .active { color:var(--primary); background:#dff49c; }
 .main { max-width:1240px; padding:3.4rem 1.5rem 5.5rem; }
-.home-info { position:relative; display:block; min-height:500px!important; margin:0 0 2.6rem; padding:clamp(2.2rem,6vw,5.6rem); overflow:hidden; border:1px solid #cfd8b2; border-radius:4px 48px 4px 48px; background:#e0f29b; box-shadow:14px 14px 0 #1d2d22; }
+.home-info { position:relative; display:block; min-height:500px!important; margin:0 0 2.6rem; padding:clamp(2.2rem,6vw,5.6rem); overflow:hidden; border:1px solid #cfd8b2; border-radius:4px 48px 4px 48px; background:#dcebb5; box-shadow:14px 14px 0 #1d2d22; }
 .home-info::before { content:'AYRIX'; position:absolute; top:1.7rem; right:clamp(1.4rem,4vw,4rem); color:#4c6f24; font-family:'DM Mono',monospace; font-size:.7rem; letter-spacing:.18em; }
 .home-info::after { content:'A'; position:absolute; z-index:0; right:-.04em; bottom:-.24em; color:rgba(255,253,248,.65); font-family:'Playfair Display',serif; font-size:clamp(18rem,45vw,43rem); font-weight:700; line-height:.72; -webkit-text-stroke:1px rgba(24,38,29,.1); }
 .home-info .entry-header,.home-info .entry-content,.home-info .entry-footer { position:relative; z-index:1; }
-.home-info .entry-header h1 { max-width:11ch; margin:0; color:var(--primary); font-family:'Playfair Display',Georgia,serif; font-size:clamp(3.1rem,7.4vw,6.8rem); font-weight:700; line-height:.91; letter-spacing:-.075em; }
+.home-info .entry-header h1 { max-width:11ch; margin:0; color:#18291e; font-family:'Playfair Display',Georgia,serif; font-size:clamp(3.1rem,7.4vw,6.8rem); font-weight:700; line-height:.91; letter-spacing:-.075em; }
 .home-info .entry-header h1::before { content:'FIELD NOTES FOR CURIOUS BUILDERS'; display:block; margin-bottom:1.65rem; color:#597c25; font-family:'DM Mono',monospace; font-size:.67rem; font-weight:500; letter-spacing:.12em; }
-.home-info .entry-content { max-width:31rem; margin:2.2rem 0 0; color:#405138; font-size:1rem; line-height:1.8; }
+.home-info .entry-content { max-width:31rem; margin:2.2rem 0 0; color:#34463b; font-size:1rem; line-height:1.8; }
 .home-info .entry-content strong { color:var(--primary); }.home-info .entry-content a,.post-content a { color:#496d1d; text-decoration-color:#9fbd52; }
 .social-icons { margin-top:1.45rem; }.social-icons a { width:38px;height:38px;border:1px solid rgba(24,38,29,.22);border-radius:50%;color:var(--primary); }.social-icons a:hover { border-color:var(--primary);background:var(--primary);color:#e0f29b; }
 .home-hero { display:none; }.home-sections{max-width:none;}.home-stats { gap:1rem; margin:0 0 5rem; padding:0; border:0; background:none; }.home-stat { align-items:flex-start; padding:1.25rem 1.4rem; border:1px solid var(--border); border-radius:14px; background:rgba(255,253,248,.65); }.home-stat:first-child{border-left:1px solid var(--border);}.home-stat-value{color:var(--brand-2);font-family:'Playfair Display',serif;font-size:2.7rem;}.home-stat-label{color:var(--secondary);font-size:.65rem;letter-spacing:.1em;}
