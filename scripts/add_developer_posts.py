@@ -12,10 +12,12 @@ posts = [
 ]
 
 def shell(slug, title, description, minutes, words, cover, alt, content):
+    cover = {"/images/codex-cli-banner.png": "/images/covers/codex-ubuntu-cli-banner.png", "/images/covers/ubuntu-cover.png": "/images/covers/claude-ubuntu-cli-banner.png"}.get(cover, cover)
     return f'''<!doctype html><html lang=en dir=auto data-theme=dark><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="index, follow"><title>{title} | Aayrix</title><meta name=description content="{description}"><link rel=canonical href="https://ayrix.online/posts/{slug}/"><link rel=stylesheet href=/assets/css/stylesheet.4ea0df3983f223cad367032f4b80a5ef62ddcd0a18dcab9c723feaeb274b6e7c.css><link rel=stylesheet href=/assets/css/ayrix-motion.css><link rel=stylesheet href=/assets/css/ayrix-redesign.css><meta property="og:type" content="article"><meta property="og:title" content="{title}"><meta property="og:description" content="{description}"><meta property="og:url" content="https://ayrix.online/posts/{slug}/"><meta property="article:published_time" content="{iso}"></head><body id=top><header class=header><nav class=header-nav><div class=logo><a href=/>Aayrix</a></div><ul class=menu><li><a href=/>Home</a></li><li><a href=/posts/>Publications</a></li><li><a href=/tags/>Tags</a></li><li><a href=/categories/>Categories</a></li><li><a href=/about/>About Me</a></li><li><a href=/contact/>Contact</a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><nav class=breadcrumbs><a href=/>Home</a> / <a href=/posts/>Publications</a></nav><h1 class=post-title>{title}</h1><div class=post-description>{description}</div><div class=post-meta><span>{date}</span>&nbsp;·&nbsp;<span>{minutes}</span>&nbsp;·&nbsp;<span>{words} words</span>&nbsp;·&nbsp;<span>Aliyan</span></div></header><figure class=entry-cover><img loading=eager src="{cover}" alt="{alt}"></figure><div class="post-content md-content">{content}</div><footer class=post-footer><ul class=post-tags><li><a href=/tags/git/>Git</a></li><li><a href=/tags/linux/>Linux</a></li><li><a href=/tags/developer/>Developer</a></li></ul></footer></article></main><footer class=footer><span>© 2026 Aayrix. All rights reserved.</span> · <span>Built with HTML &amp; CSS</span></footer></body></html>'''
 
 def card(post):
     slug, title, desc, minutes, words, cover, alt, _ = post
+    cover = {"/images/codex-cli-banner.png": "/images/covers/codex-ubuntu-cli-banner.png", "/images/covers/ubuntu-cover.png": "/images/covers/claude-ubuntu-cli-banner.png"}.get(cover, cover)
     return f'<article class=post-entry><figure class=entry-cover><img loading=lazy src="{cover}" alt="{alt}"></figure><header class=entry-header><h2 class=entry-hint-parent>{title}</h2></header><div class=entry-content><p>{desc}</p></div><footer class=entry-footer><span>{date}</span>&nbsp;·&nbsp;<span>{minutes}</span>&nbsp;·&nbsp;<span>{words} words</span>&nbsp;·&nbsp;<span>Aliyan</span></footer><a class=entry-link aria-label="post link to {title}" href=/posts/{slug}/></a></article>'
 
 for post in posts:
@@ -29,6 +31,12 @@ for page in (public / "posts/index.html", public / "index.html"):
     html = page.read_text(encoding="utf-8")
     if all(f'/posts/{post[0]}/' not in html for post in posts):
         page.write_text(html.replace('<article class=post-entry>', cards + '<article class=post-entry>', 1), encoding="utf-8")
+
+listing = public / "posts/index.html"
+listing_html = listing.read_text(encoding="utf-8")
+listing_html = listing_html.replace('src="/images/codex-cli-banner.png" alt="OpenAI Codex CLI on Ubuntu"', 'src="/images/covers/codex-ubuntu-cli-banner.png" alt="OpenAI Codex CLI on Ubuntu"')
+listing_html = listing_html.replace('src="/images/covers/ubuntu-cover.png" alt="Claude Code running in an Ubuntu terminal"', 'src="/images/covers/claude-ubuntu-cli-banner.png" alt="Claude Code running in an Ubuntu terminal"')
+listing.write_text(listing_html, encoding="utf-8")
 
 # The homepage uses a curated card grid rather than post-entry elements.
 home = public / "index.html"
