@@ -1,0 +1,28 @@
+{{ define "main" }}
+<header class="page-header">
+  <h1>{{ .Title }}</h1>
+  {{ with .Content }}
+    <div class="prose">{{ . }}</div>
+  {{ end }}
+</header>
+
+<div class="post-list">
+  {{ range .Paginator.Pages }}
+    <article class="post-card">
+      <a class="title" href="{{ .RelPermalink }}">{{ .Title }}</a>
+      {{ with .Summary }}<p class="summary">{{ . }}</p>{{ end }}
+      <p class="meta">
+        {{ with .Date }}<time datetime="{{ .Format "2006-01-02" }}">{{ .Format "Jan 2, 2006" }}</time>{{ end }}
+        {{ with .ReadingTime }} · {{ . }} min{{ end }}
+      </p>
+    </article>
+  {{ end }}
+</div>
+
+{{ if gt .Paginator.TotalPages 1 }}
+  <nav class="pagination" aria-label="Pagination">
+    {{ if .Paginator.HasPrev }}<a href="{{ .Paginator.Prev.URL }}">← Newer</a>{{ end }}
+    {{ if .Paginator.HasNext }}<a href="{{ .Paginator.Next.URL }}">Older →</a>{{ end }}
+  </nav>
+{{ end }}
+{{ end }}

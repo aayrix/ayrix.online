@@ -1,0 +1,14 @@
+{{ $menu := .menu }}
+{{ $page := .page }}
+{{ $class := .class }}
+<nav class="{{ $class }}" aria-label="Site sections">
+  {{ range $menu }}
+    {{ $active := or ($page.IsMenuCurrent "main" .) ($page.HasMenuCurrent "main" .) }}
+    {{ if eq .URL "/" }}
+      {{ $active = $page.IsHome }}
+    {{ end }}
+    <a href="{{ .URL }}" class="{{ if $active }}is-active{{ end }}" {{ if $active }}aria-current="page"{{ end }}>
+      {{ .Name }}
+    </a>
+  {{ end }}
+</nav>

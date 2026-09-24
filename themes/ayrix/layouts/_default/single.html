@@ -1,0 +1,20 @@
+{{ define "main" }}
+<article class="prose post-single">
+  <header class="page-header">
+    <h1>{{ .Title }}</h1>
+    {{ if eq .Section "posts" }}
+      <p class="meta">
+        {{ with .Date }}<time datetime="{{ .Format "2006-01-02" }}">{{ .Format "Jan 2, 2006" }}</time> · {{ end }}
+        {{ with .ReadingTime }}{{ . }} min read{{ end }}
+        {{ with .WordCount }} · {{ . }} words{{ end }}
+      </p>
+    {{ end }}
+  </header>
+  <div class="post-body">
+    {{ .Content }}
+  </div>
+  {{ if and (eq .Section "posts") (.Site.Params.ShowPostNavLinks) }}
+    {{ partial "post-nav.html" . }}
+  {{ end }}
+</article>
+{{ end }}

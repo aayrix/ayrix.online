@@ -1,0 +1,8 @@
+name = "Ayrix"
+license = "MIT"
+licenselink = "https://opensource.org/licenses/MIT"
+description = "Terminal-meets-spaceship Hugo theme for ayrix.online"
+min_version = "0.120.0"
+
+[author]
+  name = "Aliyan"

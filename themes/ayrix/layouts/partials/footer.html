@@ -1,0 +1,10 @@
+<footer class="site-footer">
+  <span>© {{ now.Year }} Ayrix. All rights reserved.</span>
+  <span>
+    {{ with site.Params.socialIcons }}
+      {{ range . }}
+        <a href="{{ .url }}" rel="noopener noreferrer">{{ .name }}</a>
+      {{ end }}
+    {{ end }}
+  </span>
+</footer>

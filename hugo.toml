@@ -1,10 +1,10 @@
 baseURL = 'https://ayrix.online/'
 languageCode = "en-us"
-title = "Aayrix"
-theme = "hugo-PaperMod"
+title = "Ayrix"
+theme = "ayrix"
 summaryLength = 30
 enableRobotsTXT = true
-copyright = "© {year} Aayrix. All rights reserved."
+copyright = "© {{ now.Year }} Ayrix. All rights reserved."
 
 [pagination]
 pagerSize = 5

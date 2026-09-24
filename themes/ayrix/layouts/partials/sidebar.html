@@ -1,0 +1,12 @@
+<aside class="app-sidebar" aria-label="Primary">
+  <div class="app-brand">
+    <a href="{{ "" | relURL }}" data-transition-persist="logo">Ayrix</a>
+    <span>Aliyan · FAST NUCES</span>
+  </div>
+  {{ partial "nav-links.html" (dict "menu" site.Menus.main "page" . "class" "app-nav") }}
+  <div class="app-sidebar-footer">
+    <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle color theme">
+      <span aria-hidden="true">◐</span> Theme
+    </button>
+  </div>
+</aside>
