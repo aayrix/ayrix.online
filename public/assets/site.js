@@ -21,7 +21,6 @@ if (intro) {
       intro.remove();
       introRoot.classList.remove('intro-on', 'intro-reveal');
       pageElements.forEach((element, index) => { element.inert = previousInert[index]; });
-      try { sessionStorage.setItem('ayrix-intro', '1'); } catch {}
     };
 
     const leave = () => {
