@@ -35,3 +35,88 @@
 
 /* Keep the supplied portrait banners fully visible instead of cropping them. */
 img[src*="codex-ubuntu-cli-banner"],img[src*="claude-ubuntu-cli-banner"]{object-fit:contain!important;background:#061009}.post-entry:has(img[src*="codex-ubuntu-cli-banner"]) .entry-cover,.post-entry:has(img[src*="claude-ubuntu-cli-banner"]) .entry-cover{display:grid;place-items:center;background:#061009}.post-single .entry-cover:has(img[src*="codex-ubuntu-cli-banner"]),.post-single .entry-cover:has(img[src*="claude-ubuntu-cli-banner"]){display:grid;place-items:center;background:#061009}.post-single .entry-cover:has(img[src*="codex-ubuntu-cli-banner"]) img,.post-single .entry-cover:has(img[src*="claude-ubuntu-cli-banner"]) img{max-height:460px}
+
+/* Make long form articles easier to scan and read. */
+.post-single .post-content {
+  max-width: 72ch;
+  margin-inline: auto;
+  font-size: clamp(1rem, 1.1vw, 1.08rem);
+  line-height: 1.85;
+  text-wrap: pretty;
+}
+
+.post-single .post-content p,
+.post-single .post-content ul,
+.post-single .post-content ol {
+  margin-block: 1.25em;
+}
+
+.post-single .post-content li + li {
+  margin-top: 0.45em;
+}
+
+.post-single .post-content h2 {
+  margin-block: 2.8em 0.8em;
+  padding-top: 0.8em;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+.post-single .post-content h3,
+.post-single .post-content h4 {
+  margin-block: 2em 0.65em;
+  line-height: 1.3;
+  text-wrap: balance;
+}
+
+.post-single .post-content :is(ul, ol) {
+  padding-inline-start: 1.5em;
+}
+
+.post-single .post-content :not(pre) > code {
+  padding: 0.12em 0.38em;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background: var(--entry);
+  font-size: 0.88em;
+  white-space: break-spaces;
+}
+
+.post-single .post-content pre {
+  margin-block: 1.75em;
+  line-height: 1.65;
+  tab-size: 2;
+}
+
+.post-single .post-content figure {
+  margin: 2em 0;
+}
+
+.post-single .post-content figcaption {
+  margin-top: 0.7em;
+  color: var(--secondary);
+  font-size: 0.88em;
+  text-align: center;
+}
+
+.post-single .post-content hr {
+  width: 5rem;
+  margin: 3em auto;
+  border: 0;
+  border-top: 2px solid var(--border);
+}
+
+@media (max-width: 700px) {
+  .post-single .post-content {
+    line-height: 1.78;
+  }
+
+  .post-single .post-content h2 {
+    margin-top: 2.3em;
+  }
+
+  .post-single .post-content pre {
+    margin-inline: -0.25rem;
+    padding-inline: 1rem;
+  }
+}

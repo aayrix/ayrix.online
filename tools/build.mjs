@@ -6,6 +6,8 @@ const OUT = join(ROOT, 'public');
 const YEAR = new Date().getFullYear();
 const EMAIL = 'aliyanniazi370@gmail.com';
 const THEME_INIT = `<meta name="theme-color" content="#07111f" media="(prefers-color-scheme: dark)"><meta name="theme-color" content="#F7FAFC" media="(prefers-color-scheme: light)"><script>try{var t=localStorage.getItem('theme');if(!t)t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme='dark'}</script>`;
+const INTRO_INIT = `<script id="ayrix-intro-init">(function(){try{var reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;var seen=sessionStorage.getItem('ayrix-intro');var force=/(?:^|[?&])intro=1(?:&|$)/.test(location.search);if(!reduced&&(force||!seen))document.documentElement.classList.add('intro-on')}catch(e){}})();</script>`;
+const INTRO_MARKUP = `<div class="intro" id="intro" role="dialog" aria-modal="true" aria-label="Ayrix welcome animation"><div class="intro-panel intro-panel--top"></div><div class="intro-panel intro-panel--bottom"></div><div class="intro-stage" aria-hidden="true"><div class="intro-grid"></div><div class="intro-glow"></div><div class="intro-group"><svg class="intro-mark" viewBox="0 0 64 64" fill="none" stroke-linecap="round" stroke-linejoin="round" focusable="false"><defs><linearGradient id="intro-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6ee7b7"/><stop offset="1" stop-color="#10b981"/></linearGradient></defs><circle class="draw ring" cx="32" cy="32" r="29" pathLength="1" stroke="#34d399" stroke-opacity=".45" stroke-width="1.5"/><path class="draw leg-l" d="M14 50 L32 14" pathLength="1" stroke="url(#intro-g)" stroke-width="3.6"/><path class="draw leg-r" d="M32 14 L50 50" pathLength="1" stroke="url(#intro-g)" stroke-width="3.6"/><path class="draw bar" d="M23 38 H41" pathLength="1" stroke="url(#intro-g)" stroke-width="3.6"/></svg><div class="intro-word" aria-label="Ayrix"><span class="ch" style="--i:0">A</span><span class="ch" style="--i:1">y</span><span class="ch" style="--i:2">r</span><span class="ch" style="--i:3">i</span><span class="ch" style="--i:4">x</span><span class="caret"></span></div><p class="intro-tag">Linux · GitHub · AI coding tools</p><ul class="intro-boot"><li style="--i:0">$ ayrix init</li><li style="--i:1"><span class="ok">✓</span> guides loaded</li><li style="--i:2"><span class="ok">✓</span> ready</li></ul></div><div class="intro-bar"></div></div><div class="intro-seam"></div><button class="intro-skip" type="button">Skip intro</button></div>`;
 const POST_DESCRIPTIONS = {
   'my-first-post': 'A short introduction from Aliyan and the goals behind the Ayrix technical guide collection.',
   'codex-cli-ubuntu-guide': 'Install Codex CLI on Ubuntu, sign in, configure permissions, and start an AI-assisted coding session.',
@@ -37,6 +39,7 @@ const cssParts = [
   'assets/css/ayrix-motion.css',
   'assets/css/ayrix-redesign.css',
   'assets/css/site-overrides.css',
+  'assets/css/ayrix-intro.css',
 ];
 const css = (await Promise.all(cssParts.map(async (part) => {
   try { return await readFile(join(OUT, part), 'utf8'); } catch { return ''; }
@@ -55,6 +58,7 @@ for (const file of htmlFiles) {
 
   html = html
     .replaceAll(THEME_INIT, '')
+    .replace(/<script id="ayrix-intro-init">[\s\S]*?<\/script>/g, '')
     .replace(/<link rel="stylesheet" href="\/assets\/site\.css"><script type="module" src="\/assets\/site\.js"><\/script>/g, '')
     .replace(/<meta\s+name=generator[^>]*>\s*/gi, '')
     .replace(/<a class="skip-link" href="#main-content">Skip to content<\/a>/gi, '')
@@ -106,8 +110,8 @@ for (const file of htmlFiles) {
   }
   if (!/name=twitter:card|name="twitter:card"/i.test(html)) html = html.replace(/<\/head>/i, '<meta name="twitter:card" content="summary_large_image"></head>');
   html = html.replace(/,\s*"mailto:[^"]*"/gi, '');
-  html = html.replace(/<head([^>]*)>/i, `<head$1>${THEME_INIT}<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'">`);
-  html = html.replace(/<body([^>]*)>/i, '<body$1><a class="skip-link" href="#main-content">Skip to content</a>');
+  html = html.replace(/<head([^>]*)>/i, `<head$1>${THEME_INIT}${INTRO_INIT}<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'">`);
+  html = html.replace(/<body([^>]*)>/i, (match, attrs) => `<body${attrs}>${html.includes('id="intro"') ? '' : INTRO_MARKUP}<a class="skip-link" href="#main-content">Skip to content</a>`);
   html = html.replace(/localStorage\.setItem\("darkmode",e\)/g, 'localStorage.setItem("darkmode",e),localStorage.setItem("theme",e?"dark":"light")');
   html = html.replace(/<main\b([^>]*)>/i, (match, attrs) => {
     const remaining = attrs.replace(/\s*\bid=["'][^"']*["']/i, '').trim();

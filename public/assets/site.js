@@ -1,3 +1,58 @@
+const introRoot = document.documentElement;
+const intro = document.getElementById('intro');
+
+if (intro) {
+  if (!introRoot.classList.contains('intro-on')) {
+    intro.remove();
+  } else {
+    const pageElements = [...document.body.children].filter((element) => element !== intro);
+    const previousInert = pageElements.map((element) => element.inert);
+    pageElements.forEach((element) => { element.inert = true; });
+
+    const skipButton = intro.querySelector('.intro-skip');
+    let leaving = false;
+    let finished = false;
+    let timer;
+
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      window.clearTimeout(timer);
+      intro.remove();
+      introRoot.classList.remove('intro-on', 'intro-reveal');
+      pageElements.forEach((element, index) => { element.inert = previousInert[index]; });
+      try { sessionStorage.setItem('ayrix-intro', '1'); } catch {}
+    };
+
+    const leave = () => {
+      if (leaving || finished) return;
+      leaving = true;
+      window.clearTimeout(timer);
+      introRoot.classList.add('intro-reveal');
+      intro.classList.add('leave');
+      const lastPanel = intro.querySelector('.intro-panel--bottom');
+      lastPanel.addEventListener('transitionend', (event) => {
+        if (event.target === lastPanel && event.propertyName === 'transform') finish();
+      }, { once: true });
+      window.setTimeout(finish, 1200);
+    };
+
+    timer = window.setTimeout(leave, 1900);
+    intro.addEventListener('click', leave);
+    skipButton.addEventListener('click', (event) => {
+      event.stopPropagation();
+      leave();
+    });
+    window.addEventListener('keydown', (event) => {
+      if (!leaving && (event.key === 'Escape' || event.key === 'Enter' || event.key === ' ')) {
+        event.preventDefault();
+        leave();
+      }
+    });
+    skipButton.focus({ preventScroll: true });
+  }
+}
+
 const user = 'aliyanniazi370';
 const host = 'gmail.com';
 const address = `${user}@${host}`;
