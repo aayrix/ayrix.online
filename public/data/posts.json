@@ -1,0 +1,174 @@
+[
+  {
+    "slug": "welcome-to-aayrix-blog",
+    "title": "Welcome to Ayrix — Developer Guides & Tutorials",
+    "description": "An introduction to this blog: Linux guides, GitHub workflows, Hugo tutorials, and copy-paste commands for developers.",
+    "date": "2026-06-01",
+    "updated": "2026-06-01",
+    "category": "welcome",
+    "tags": [
+      "welcome",
+      "blog",
+      "developer",
+      "tutorials"
+    ],
+    "cover": "images/covers/welcome-cover.png"
+  },
+  {
+    "slug": "install-arch-linux-complete-guide",
+    "title": "How to Install Arch Linux — Complete Step-by-Step Guide",
+    "description": "A complete Arch Linux installation guide: download ISO, partition disks, install base system, configure bootloader, and set up a desktop environment.",
+    "date": "2026-06-02",
+    "updated": "2026-06-02",
+    "category": "arch-linux",
+    "tags": [
+      "arch-linux",
+      "linux",
+      "installation",
+      "guide",
+      "terminal"
+    ],
+    "cover": "images/covers/arch-cover.png"
+  },
+  {
+    "slug": "github-cli-complete-guide",
+    "title": "GitHub CLI (gh) — Complete Guide with Copy-Paste Commands",
+    "description": "Install GitHub CLI on Linux, authenticate with GitHub, and manage repos, issues, pull requests, and releases from the terminal.",
+    "date": "2026-06-03",
+    "updated": "2026-06-03",
+    "category": "github",
+    "tags": [
+      "github",
+      "github-cli",
+      "gh",
+      "terminal",
+      "devtools"
+    ],
+    "cover": "images/covers/github-cover.png"
+  },
+  {
+    "slug": "hugo-pages-complete-guide",
+    "title": "How to Make Hugo Pages — Complete Guide with All Commands",
+    "description": "Learn to install Hugo, create pages and posts, configure your site, build for production, and deploy to GitHub Pages with copy-paste commands.",
+    "date": "2026-06-04",
+    "updated": "2026-06-04",
+    "category": "hugo",
+    "tags": [
+      "hugo",
+      "static-site",
+      "github-pages",
+      "webdev",
+      "markdown"
+    ],
+    "cover": "images/covers/hugo-cover.png"
+  },
+  {
+    "slug": "github-install-and-usage-guide",
+    "title": "GitHub — Full Install & Usage Guide with All Commands",
+    "description": "Complete guide to installing Git, configuring GitHub, SSH keys, cloning repos, branching, committing, pushing, and collaborating on GitHub.",
+    "date": "2026-06-05",
+    "updated": "2026-06-05",
+    "category": "github",
+    "tags": [
+      "github",
+      "git",
+      "version-control",
+      "ssh",
+      "devtools"
+    ],
+    "cover": "images/covers/github-cover.png"
+  },
+  {
+    "slug": "install-ubuntu-complete-guide",
+    "title": "How to Install Ubuntu — Complete Step-by-Step Guide",
+    "description": "A complete Ubuntu installation guide: download ISO, create a bootable USB, run the installer, partition your disk, and set up your system after first boot.",
+    "date": "2026-06-06",
+    "updated": "2026-06-06",
+    "category": "ubuntu",
+    "tags": [
+      "ubuntu",
+      "linux",
+      "installation",
+      "guide",
+      "terminal"
+    ],
+    "cover": "images/covers/ubuntu-cover.png"
+  },
+  {
+    "slug": "my-first-post",
+    "title": "My First Post",
+    "description": "A short introduction from Aliyan and the goals behind the Ayrix technical guide collection.",
+    "date": "2026-06-08",
+    "updated": "2026-06-08",
+    "category": "introduction",
+    "tags": [
+      "introduction",
+      "blog"
+    ],
+    "cover": "images/ayrix-social.svg"
+  },
+  {
+    "slug": "codex-cli-ubuntu-guide",
+    "title": "Install & Configure Codex CLI on Ubuntu — Ayrix",
+    "description": "Install Codex CLI on Ubuntu, sign in, configure permissions, and start an AI-assisted coding session.",
+    "date": "2026-08-29",
+    "updated": "2026-08-29",
+    "category": "ai-tools",
+    "tags": [
+      "codex-cli",
+      "ubuntu",
+      "linux",
+      "ai",
+      "installation"
+    ],
+    "cover": "images/ayrix-social.svg"
+  },
+  {
+    "slug": "cursor-ai-complete-developer-guide",
+    "title": "Cursor AI — Complete Developer Guide for Linux",
+    "description": "Install Cursor on Linux, configure AI-assisted coding, use Agent mode, and boost productivity with keyboard shortcuts and rules.",
+    "date": "2026-08-29",
+    "updated": "2026-08-29",
+    "category": "cursor",
+    "tags": [
+      "cursor",
+      "ai",
+      "devtools",
+      "guide",
+      "tutorials"
+    ],
+    "cover": "images/covers/welcome-cover.png"
+  },
+  {
+    "slug": "claude-code-ubuntu-cli-guide",
+    "title": "How to Install Claude Code on Ubuntu: Complete CLI Guide",
+    "description": "Install Claude Code on Ubuntu, authenticate safely, and use practical terminal workflows.",
+    "date": "2026-09-05",
+    "updated": "2026-09-05",
+    "category": "ai-tools",
+    "tags": [
+      "claude-code",
+      "ubuntu",
+      "linux",
+      "ai",
+      "installation"
+    ],
+    "cover": "images/ayrix-social.svg"
+  },
+  {
+    "slug": "codex-cli-ubuntu-openai-agent-guide",
+    "title": "How to Install Codex CLI and Connect Your OpenAI Account on Ubuntu",
+    "description": "Set up OpenAI Codex CLI on Ubuntu, sign in securely, and run your first coding task.",
+    "date": "2026-09-05",
+    "updated": "2026-09-05",
+    "category": "ai-tools",
+    "tags": [
+      "codex-cli",
+      "ubuntu",
+      "linux",
+      "ai",
+      "openai"
+    ],
+    "cover": "images/ayrix-social.svg"
+  }
+]

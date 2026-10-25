@@ -12,6 +12,11 @@ const POST_DESCRIPTIONS = {
   'claude-code-ubuntu-cli-guide': 'Install Claude Code on Ubuntu, authenticate safely, and use practical terminal workflows.',
   'codex-cli-ubuntu-openai-agent-guide': 'Set up OpenAI Codex CLI on Ubuntu, sign in securely, and run your first coding task.',
 };
+const IMAGE_DIMENSIONS = {
+  'arch-cover': [1536, 1024], 'claude-ubuntu-cli-banner': [686, 608],
+  'codex-ubuntu-cli-banner': [613, 653], 'github-cover': [1536, 1024],
+  'hugo-cover': [1536, 1024], 'ubuntu-cover': [1536, 1024], 'welcome-cover': [1536, 1024],
+};
 
 async function* walk(dir) {
   for (const entry of await readdir(dir, { withFileTypes: true })) {
@@ -72,6 +77,7 @@ for (const file of htmlFiles) {
   html = html.replace(/lang=en-us/gi, 'lang=en');
   html = html.replace(/rel=noopener\b/gi, 'rel="noopener noreferrer"');
   html = html.replace(/rel="([^"]*)"/gi, (whole, rel) => rel.includes('noopener') && !rel.includes('noreferrer') ? `rel="${rel} noreferrer"` : whole);
+  html = html.replace(/<a\b([^>]*\btarget=["']?_blank["']?[^>]*)>/gi, (whole, attrs) => /\brel=/i.test(attrs) ? whole : `<a${attrs} rel="noopener noreferrer">`);
 
   let pageTitle = path === '/index.html' ? 'Home' : (title || 'Page');
   if (/^\/tags\/[^/]+\/index\.html$/.test(path) && path !== '/tags/index.html') pageTitle = `Tag: ${pageTitle}`;
@@ -104,6 +110,20 @@ for (const file of htmlFiles) {
   html = html.replace(/<body([^>]*)>/i, '<body$1><a class="skip-link" href="#main-content">Skip to content</a>');
   html = html.replace(/localStorage\.setItem\("darkmode",e\)/g, 'localStorage.setItem("darkmode",e),localStorage.setItem("theme",e?"dark":"light")');
   html = html.replace(/<main\b([^>]*)>/i, (match, attrs) => `<main id="main-content"${attrs.replace(/\bid=["'][^"']*["']/i, '')}>`);
+  html = html.replace(/<a class="site-search-link"[^>]*>[\s\S]*?<\/a>/gi, '');
+  html = html.replace('</ul></nav></header>', '</ul><a class="site-search-link" href="/posts/" data-search-open aria-keyshortcuts="Control+K">Search <kbd>Ctrl K</kbd></a></nav></header>');
+  html = html.replace(/<img\b[^>]*>/gi, (tag) => {
+    const src = tag.match(/\bsrc=(['"]?)(\/images\/covers\/[^'"\s>]+)\1/i);
+    if (!src || !src[2].endsWith('.png')) return tag;
+    const base = src[2].slice('/images/covers/'.length, -4);
+    const size = IMAGE_DIMENSIONS[base];
+    if (!size) return tag;
+    let updated = tag.replace(src[0], `src="/images/covers/${base}.webp"`);
+    if (!/\bwidth=/i.test(updated)) updated = updated.replace(/<img\b/i, `<img width="${size[0]}" height="${size[1]}"`);
+    if (!/\bdecoding=/i.test(updated)) updated = updated.replace(/<img\b/i, '<img decoding="async"');
+    if (path === '/index.html' && base === 'welcome-cover') updated = updated.replace(/loading=lazy/i, 'loading=eager fetchpriority="high"');
+    return updated;
+  });
   html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/assets/site.css"><script type="module" src="/assets/site.js"></script></head>');
 
   if (path === '/index.html') {
@@ -140,7 +160,10 @@ for (const file of htmlFiles) {
 }
 
 await mkdir(join(ROOT, 'data'), { recursive: true });
-await writeFile(join(ROOT, 'data/posts.json'), `${JSON.stringify(posts.sort((a,b) => a.date.localeCompare(b.date)), null, 2)}\n`);
+const manifest = `${JSON.stringify(posts.sort((a,b) => a.date.localeCompare(b.date)), null, 2)}\n`;
+await writeFile(join(ROOT, 'data/posts.json'), manifest);
+await mkdir(join(OUT, 'data'), { recursive: true });
+await writeFile(join(OUT, 'data/posts.json'), manifest);
 await writeFile(join(OUT, '.nojekyll'), '');
 await writeFile(join(OUT, 'robots.txt'), 'User-agent: *\nAllow: /\nSitemap: https://ayrix.online/sitemap.xml\n');
 
@@ -151,4 +174,8 @@ const escapeXml = (value) => value.replaceAll('&', '&amp;').replaceAll('<', '&lt
 const feed = `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"><channel><title>Ayrix</title><link>https://ayrix.online/</link><description>Practical technical guides by Aliyan.</description><language>en</language>${posts.map((post) => `<item><title>${escapeXml(post.title)}</title><link>https://ayrix.online/posts/${post.slug}/</link><guid>https://ayrix.online/posts/${post.slug}/</guid><description>${escapeXml(post.description)}</description><pubDate>${post.date ? new Date(`${post.date}T00:00:00Z`).toUTCString() : ''}</pubDate></item>`).join('')}</channel></rss>\n`;
 await writeFile(join(OUT, 'index.xml'), feed);
 await writeFile(join(OUT, 'rss.xml'), feed);
+for (const file of files.filter((path) => path.endsWith('.xml'))) {
+  const xml = await readFile(file, 'utf8');
+  await writeFile(file, xml.replaceAll('//localhost:1313', 'https://ayrix.online').replaceAll('aayrix.github.io', 'ayrix.online'));
+}
 console.log(`Built metadata for ${htmlFiles.length} pages and ${posts.length} guides.`);

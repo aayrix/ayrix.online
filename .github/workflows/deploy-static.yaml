@@ -32,6 +32,8 @@ jobs:
         run: node tools/build.mjs
       - name: Check static pages
         run: node tools/check.mjs
+      - name: Check palette contrast
+        run: node tools/contrast-check.mjs
       - name: Upload Site Artifacts
         uses: actions/upload-pages-artifact@v3
         with:

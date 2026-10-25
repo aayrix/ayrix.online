@@ -84,3 +84,71 @@ document.querySelectorAll('.post-content figure img').forEach((image) => {
   image.addEventListener('click', open);
   image.addEventListener('keydown', (event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); open(); } });
 });
+
+const searchOpeners = document.querySelectorAll('[data-search-open]');
+if (searchOpeners.length) {
+  const palette = document.createElement('dialog');
+  palette.className = 'search-palette';
+  palette.setAttribute('aria-label', 'Search Ayrix guides');
+  palette.innerHTML = '<form method="dialog" class="search-palette__form"><label for="site-search-input">Search guides</label><input id="site-search-input" type="search" autocomplete="off" placeholder="Linux, GitHub, Codex…"><button class="search-close" aria-label="Close search">Close</button></form><p class="visually-hidden" data-search-status aria-live="polite"></p><ul class="search-results" id="site-search-results"></ul>';
+  document.body.append(palette);
+  const input = palette.querySelector('input');
+  const results = palette.querySelector('.search-results');
+  const status = palette.querySelector('[data-search-status]');
+  let entries = [];
+  let returnFocus = null;
+  let activeIndex = -1;
+  let loadPromise;
+  const load = () => loadPromise ||= fetch('/data/posts.json').then((response) => response.ok ? response.json() : []).catch(() => []);
+  const open = async (trigger) => {
+    returnFocus = trigger || document.activeElement;
+    palette.showModal();
+    input.focus();
+    entries = await load();
+    render(input.value);
+  };
+  const render = (query) => {
+    const term = query.trim().toLowerCase();
+    const matches = entries.filter((post) => !term || `${post.title} ${post.description} ${post.tags.join(' ')}`.toLowerCase().includes(term)).slice(0, 8);
+    results.replaceChildren();
+    activeIndex = -1;
+    for (const post of matches) {
+      const item = document.createElement('li');
+      const link = document.createElement('a');
+      link.href = `/posts/${encodeURIComponent(post.slug)}/`;
+      const title = document.createElement('strong');
+      title.textContent = post.title;
+      const summary = document.createElement('span');
+      summary.textContent = post.description;
+      item.append(title, summary);
+      link.append(item);
+      results.append(link);
+    }
+    status.textContent = matches.length ? `${matches.length} guides found` : 'No guides found';
+  };
+  searchOpeners.forEach((link) => link.addEventListener('click', (event) => { event.preventDefault(); open(link); }));
+  input.addEventListener('input', () => render(input.value));
+  input.addEventListener('keydown', (event) => {
+    const links = [...results.querySelectorAll('a')];
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+      event.preventDefault();
+      activeIndex = (activeIndex + (event.key === 'ArrowDown' ? 1 : -1) + links.length) % links.length;
+      links[activeIndex]?.focus();
+    }
+  });
+  results.addEventListener('keydown', (event) => {
+    if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') return;
+    event.preventDefault();
+    const links = [...results.querySelectorAll('a')];
+    const current = links.indexOf(document.activeElement);
+    const next = (current + (event.key === 'ArrowDown' ? 1 : -1) + links.length) % links.length;
+    links[next]?.focus();
+  });
+  palette.addEventListener('close', () => returnFocus?.focus());
+  document.addEventListener('keydown', (event) => {
+    if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k' || event.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) {
+      event.preventDefault();
+      open(document.activeElement);
+    }
+  });
+}
