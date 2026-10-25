@@ -109,7 +109,10 @@ for (const file of htmlFiles) {
   html = html.replace(/<head([^>]*)>/i, `<head$1>${THEME_INIT}<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'">`);
   html = html.replace(/<body([^>]*)>/i, '<body$1><a class="skip-link" href="#main-content">Skip to content</a>');
   html = html.replace(/localStorage\.setItem\("darkmode",e\)/g, 'localStorage.setItem("darkmode",e),localStorage.setItem("theme",e?"dark":"light")');
-  html = html.replace(/<main\b([^>]*)>/i, (match, attrs) => `<main id="main-content"${attrs.replace(/\bid=["'][^"']*["']/i, '')}>`);
+  html = html.replace(/<main\b([^>]*)>/i, (match, attrs) => {
+    const remaining = attrs.replace(/\s*\bid=["'][^"']*["']/i, '').trim();
+    return `<main id="main-content"${remaining ? ` ${remaining}` : ''}>`;
+  });
   html = html.replace(/<a class="site-search-link"[^>]*>[\s\S]*?<\/a>/gi, '');
   html = html.replace('</ul></nav></header>', '</ul><a class="site-search-link" href="/posts/" data-search-open aria-keyshortcuts="Control+K">Search <kbd>Ctrl K</kbd></a></nav></header>');
   html = html.replace(/<img\b[^>]*>/gi, (tag) => {
