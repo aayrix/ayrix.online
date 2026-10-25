@@ -24,6 +24,14 @@ jobs:
       - name: Setup GitHub Pages
         id: pages
         uses: actions/configure-pages@v5
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build static metadata and assets
+        run: node tools/build.mjs
+      - name: Check static pages
+        run: node tools/check.mjs
       - name: Upload Site Artifacts
         uses: actions/upload-pages-artifact@v3
         with:

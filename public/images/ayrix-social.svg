@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Ayrix technical guides</title>
+  <desc id="desc">Practical Linux, GitHub, and AI coding tool guides by Aliyan.</desc>
+  <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#07111f"/><stop offset="1" stop-color="#102a35"/></linearGradient><radialGradient id="glow"><stop stop-color="#34d399" stop-opacity=".24"/><stop offset="1" stop-color="#34d399" stop-opacity="0"/></radialGradient></defs>
+  <path fill="url(#bg)" d="M0 0h1200v630H0z"/><circle cx="1020" cy="100" r="390" fill="url(#glow)"/>
+  <rect x="72" y="70" width="1056" height="490" rx="28" fill="#0c1a2c" stroke="#1e3249" stroke-width="2"/>
+  <circle cx="118" cy="112" r="8" fill="#f87171"/><circle cx="146" cy="112" r="8" fill="#fbbf24"/><circle cx="174" cy="112" r="8" fill="#34d399"/>
+  <text x="120" y="236" fill="#34d399" font-family="monospace" font-size="24" letter-spacing="6">AYRIX / FIELD NOTES</text>
+  <text x="120" y="342" fill="#e7eef6" font-family="system-ui,sans-serif" font-size="72" font-weight="700">Practical guides</text>
+  <text x="120" y="430" fill="#e7eef6" font-family="system-ui,sans-serif" font-size="72" font-weight="700">for building well.</text>
+  <text x="120" y="500" fill="#93a7bd" font-family="system-ui,sans-serif" font-size="26">Linux · GitHub · AI coding tools · by Aliyan</text>
+</svg>
