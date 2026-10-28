@@ -172,6 +172,50 @@ COVERS = {
             <circle cx="0" cy="90" r="16" fill="#34d399" filter="drop-shadow(0 0 14px #34d399)"/>
         </g>
         """
+    },
+    "claude-code-cover": {
+        "badge": "ANTHROPIC CLI",
+        "title": "Claude Code on Ubuntu",
+        "subtitle": "Terminal Agent Setup, Authentication &amp; Safe Workflows",
+        "accent": "#ea580c",
+        "accent_glow": "#c2410c",
+        "theme_color": "#f59e0b",
+        "svg_graphics": """
+        <!-- 3D Isometric Terminal with Claude Code Agent -->
+        <g transform="translate(880, 310) rotate(-7) skewX(-10)">
+            <rect x="20" y="20" width="500" height="360" rx="20" fill="#000000" opacity="0.6" filter="blur(20px)"/>
+            <rect x="0" y="0" width="500" height="360" rx="18" fill="#0c1626" stroke="#ea580c" stroke-width="2.5"/>
+            <!-- Title Bar -->
+            <rect x="0" y="0" width="500" height="42" rx="18" fill="#142236"/>
+            <circle cx="28" cy="21" r="6" fill="#f87171"/>
+            <circle cx="50" cy="21" r="6" fill="#fbbf24"/>
+            <circle cx="72" cy="21" r="6" fill="#34d399"/>
+            <text x="100" y="27" fill="#94a3b8" font-family="monospace" font-size="14">claude ~ agentic terminal (Ubuntu)</text>
+
+            <!-- Terminal Output -->
+            <text x="30" y="80" fill="#94a3b8" font-family="monospace" font-size="15">$ npm install -g @anthropic-ai/claude-code</text>
+            <text x="30" y="115" fill="#34d399" font-family="monospace" font-size="15">✓ Claude Code CLI installed</text>
+            <text x="30" y="150" fill="#94a3b8" font-family="monospace" font-size="15">$ claude doctor</text>
+            <text x="30" y="185" fill="#f59e0b" font-family="monospace" font-size="15">✓ Authenticated via Anthropic Console</text>
+
+            <!-- AI Agent Interactive Card -->
+            <rect x="25" y="220" width="450" height="105" rx="12" fill="#182338" stroke="#f59e0b" stroke-width="1.6"/>
+            <text x="45" y="255" fill="#ea580c" font-family="monospace" font-size="15" font-weight="bold">✻ Claude Code > Agent session active</text>
+            <text x="45" y="285" fill="#e2e8f0" font-family="monospace" font-size="14">Explaining architecture &amp; proposing safe git checkpoint</text>
+        </g>
+
+        <!-- 3D Anthropic Spark Geometry & Orbiting Beacons -->
+        <g transform="translate(1200, 600)">
+            <ellipse cx="0" cy="0" rx="170" ry="65" fill="none" stroke="#ea580c" stroke-width="2" transform="rotate(-25)"/>
+            <ellipse cx="0" cy="0" rx="140" ry="50" fill="none" stroke="#f59e0b" stroke-width="1.8" transform="rotate(35)"/>
+            <!-- Center 3D Glowing Spark -->
+            <circle cx="0" cy="0" r="22" fill="#ea580c" filter="drop-shadow(0 0 20px #ea580c)"/>
+            <circle cx="0" cy="0" r="12" fill="#fed7aa"/>
+            <!-- Radiating Orbit Beacons -->
+            <circle cx="-130" cy="-45" r="10" fill="#f59e0b" filter="drop-shadow(0 0 12px #f59e0b)"/>
+            <circle cx="130" cy="45" r="12" fill="#38bdf8" filter="drop-shadow(0 0 14px #38bdf8)"/>
+        </g>
+        """
     }
 }
 
