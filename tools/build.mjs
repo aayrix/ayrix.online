@@ -58,7 +58,7 @@ for (const file of htmlFiles) {
   const path = '/' + relative(OUT, file).replace(/\\/g, '/');
   let html = await readFile(file, 'utf8');
   const titleMatch = html.match(/<title>([\s\S]*?)<\/title>/i);
-  let title = (titleMatch?.[1] || 'Ayrix').replace(/\s*\|\s*Ayrix\s*$/i, '').replace(/^(?:Category|Tag):\s*/gi, '').replace(/&amp;/g, '&').replace(/AYRIX/g, 'Ayrix').replace('Firstt', 'First').trim();
+  let title = (titleMatch?.[1] || 'Ayrix').replace(/\s*\|\s*Ayrix\s*$/i, '').replace(/^(?:Category|Tag):\s*/gi, '').replace(/\s*—\s*Page\s*\d+/gi, '').replace(/&amp;/g, '&').replace(/AYRIX/g, 'Ayrix').replace('Firstt', 'First').trim();
   while (/^(?:Category|Tag):\s*/i.test(title)) {
     title = title.replace(/^(?:Category|Tag):\s*/i, '').trim();
   }
@@ -123,7 +123,7 @@ for (const file of htmlFiles) {
   html = html.replace(/,\s*"mailto:[^"]*"/gi, '');
   html = html.replace(/<head([^>]*)>/i, `<head$1>${THEME_INIT}${INTRO_INIT}<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'">`);
   html = html.replace(/<body([^>]*)>/i, (match, attrs) => `<body${attrs}>${html.includes('id="intro"') ? '' : INTRO_MARKUP}<a class="skip-link" href="#main-content">Skip to content</a>`);
-  html = html.replace(/localStorage\.setItem\("darkmode",e\)/g, 'localStorage.setItem("darkmode",e),localStorage.setItem("theme",e?"dark":"light")');
+  html = html.replace(/localStorage\.setItem\("darkmode",e\)(?!,localStorage\.setItem\("theme")/g, 'localStorage.setItem("darkmode",e),localStorage.setItem("theme",e?"dark":"light")');
   html = html.replace(/<main\b([^>]*)>/i, (match, attrs) => {
     const remaining = attrs.replace(/\s*\bid=["'][^"']*["']/i, '').trim();
     return `<main id="main-content"${remaining ? ` ${remaining}` : ''}>`;
