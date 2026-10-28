@@ -1,3 +1,5 @@
+import { Ayrix3DEngine, initCard3DTilt, initHeader3DParticles } from '/assets/js/ayrix-3d.js';
+
 const introRoot = document.documentElement;
 const intro = document.getElementById('intro');
 
@@ -139,6 +141,7 @@ document.querySelectorAll('.post-content figure img').forEach((image) => {
   image.addEventListener('keydown', (event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); open(); } });
 });
 
+let openSearchPalette = null;
 const searchOpeners = document.querySelectorAll('[data-search-open]');
 if (searchOpeners.length) {
   const palette = document.createElement('dialog');
@@ -161,6 +164,7 @@ if (searchOpeners.length) {
     entries = await load();
     render(input.value);
   };
+  openSearchPalette = open;
   const render = (query) => {
     const term = query.trim().toLowerCase();
     const matches = entries.filter((post) => !term || `${post.title} ${post.description} ${post.tags.join(' ')}`.toLowerCase().includes(term)).slice(0, 8);
@@ -203,6 +207,74 @@ if (searchOpeners.length) {
     if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k' || event.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) {
       event.preventDefault();
       open(document.activeElement);
+    }
+  });
+}
+
+// ----------------------------------------------------
+// 3D Website Transformation Core & Interactive Modules
+// ----------------------------------------------------
+
+// 1. Mount & Initialize 3D Hero on Homepage
+const homeInfo = document.querySelector('.home-info');
+if (homeInfo && !document.getElementById('hero-3d-canvas')) {
+  const hero3D = document.createElement('div');
+  hero3D.className = 'ayrix-3d-hero';
+  hero3D.id = 'ayrix-3d-hero';
+  hero3D.setAttribute('aria-hidden', 'true');
+  hero3D.innerHTML = `
+    <div class="ayrix-3d-hud">
+      <span class="hud-tag">3D CYBER CORE // ONLINE</span>
+      <span class="hud-hint">DRAG TO ROTATE 3D</span>
+      <span class="hud-coords" data-hud-coords>ROT: 0° / 0°</span>
+    </div>
+    <canvas class="ayrix-3d-canvas" id="hero-3d-canvas"></canvas>
+  `;
+  homeInfo.insertAdjacentElement('afterend', hero3D);
+  const canvas = hero3D.querySelector('#hero-3d-canvas');
+  if (canvas) {
+    new Ayrix3DEngine({ canvas });
+  }
+}
+
+// 2. Mount & Initialize Subtle 3D Ambient Mesh on Post Headers
+const postHeader = document.querySelector('.post-single .post-header');
+if (postHeader && !document.getElementById('header-3d-canvas')) {
+  postHeader.classList.add('header-3d-wrap');
+  const ambientCanvas = document.createElement('canvas');
+  ambientCanvas.id = 'header-3d-canvas';
+  ambientCanvas.className = 'header-3d-canvas';
+  ambientCanvas.setAttribute('aria-hidden', 'true');
+  postHeader.prepend(ambientCanvas);
+  initHeader3DParticles();
+}
+
+// 3. Initialize Interactive CSS 3D Perspective Tilt on All Cards
+initCard3DTilt();
+
+// 4. Mount 3D Tactile Floating Quick Navigation Dock
+if (!document.querySelector('.floating-3d-dock')) {
+  const dock = document.createElement('nav');
+  dock.className = 'floating-3d-dock';
+  dock.setAttribute('aria-label', '3D Quick Navigation');
+  dock.innerHTML = `
+    <a href="/"><span aria-hidden="true">✦</span> Home</a>
+    <a href="/posts/"><span aria-hidden="true">◈</span> Guides</a>
+    <button type="button" data-dock-search aria-label="Open Search"><span aria-hidden="true">⌕</span> Search</button>
+    <button type="button" data-dock-top aria-label="Scroll to top"><span aria-hidden="true">▲</span> Top</button>
+  `;
+  document.body.appendChild(dock);
+
+  dock.querySelector('[data-dock-top]')?.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  dock.querySelector('[data-dock-search]')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (typeof openSearchPalette === 'function') {
+      openSearchPalette(e.currentTarget);
+    } else {
+      window.location.href = '/posts/';
     }
   });
 }

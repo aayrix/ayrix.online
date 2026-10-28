@@ -156,6 +156,207 @@ img[src*="codex-ubuntu-cli-banner"],img[src*="claude-ubuntu-cli-banner"]{object-
   box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.5), 0 0 20px rgba(85, 230, 193, 0.2);
 }
 
+/* 3D WebGL Hero Scene & HUD */
+.ayrix-3d-hero {
+  position: relative;
+  width: 100%;
+  height: 380px;
+  margin: 2rem 0;
+  border-radius: 20px;
+  border: 1px solid rgba(85, 230, 193, 0.4);
+  background: radial-gradient(circle at 50% 50%, rgba(12, 28, 44, 0.95), #050b14);
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8), inset 0 0 40px rgba(85, 230, 193, 0.08);
+  overflow: hidden;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+}
+
+.ayrix-3d-hero:active {
+  cursor: grabbing;
+}
+
+.ayrix-3d-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.ayrix-3d-hud {
+  position: absolute;
+  top: 1rem;
+  left: 1.25rem;
+  right: 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--secondary);
+  z-index: 5;
+}
+
+.ayrix-3d-hud .hud-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(9, 20, 31, 0.85);
+  border: 1px solid rgba(85, 230, 193, 0.35);
+  color: var(--brand);
+}
+
+.ayrix-3d-hud .hud-tag:before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #34d399;
+  box-shadow: 0 0 10px #34d399;
+  animation: pulse-dot 1.8s infinite;
+}
+
+.ayrix-3d-hud .hud-hint {
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(9, 20, 31, 0.75);
+  border: 1px solid rgba(129, 168, 255, 0.25);
+  color: #94a3b8;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+/* 3D Perspective Tilt & Specular Glare */
+.home-card,
+.post-entry,
+.guide-card,
+.topic-pill {
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.card-3d-glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0;
+  z-index: 8;
+  transition: opacity 0.25s ease;
+}
+
+.home-card-icon {
+  transform: translateZ(24px);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.home-card-title {
+  transform: translateZ(18px);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.home-card-desc {
+  transform: translateZ(12px);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.home-card:hover .home-card-icon {
+  transform: translateZ(34px);
+}
+
+.home-card:hover .home-card-title {
+  transform: translateZ(26px);
+}
+
+.home-card:hover .home-card-desc {
+  transform: translateZ(18px);
+}
+
+/* Subtle 3D Ambient Header Mesh */
+.header-3d-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.header-3d-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.65;
+  z-index: 0;
+}
+
+.post-single .post-header > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* 3D Tactile Floating Dock */
+.floating-3d-dock {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(8, 16, 26, 0.88);
+  border: 1px solid rgba(85, 230, 193, 0.4);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(85, 230, 193, 0.2);
+  z-index: 900;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.floating-3d-dock a,
+.floating-3d-dock button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #cbd5e1;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.floating-3d-dock a:hover,
+.floating-3d-dock button:hover {
+  background: rgba(85, 230, 193, 0.15);
+  border-color: rgba(85, 230, 193, 0.5);
+  color: var(--brand);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .ayrix-3d-hero {
+    height: 290px;
+    margin: 1.5rem 0;
+  }
+  .floating-3d-dock {
+    bottom: 0.8rem;
+    padding: 0.35rem 0.5rem;
+    max-width: 92vw;
+    overflow-x: auto;
+  }
+}
+
 .post-single .post-content hr {
   width: 5rem;
   margin: 3em auto;
