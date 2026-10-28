@@ -1,0 +1,15 @@
+# Ralph Loop Progress Tracker: Ayrix 3D Website Conversion
+Initialized: 2026-10-28 14:38:00+05:00
+Repo: /home/ayrixx/my-blog
+Target: Ayrix 3D Technical Publication & Autonomous Ralph Loop
+
+## Iteration Log
+
+### Iteration 1 [2026-10-28 14:38 PKT]
+- Goal: Fix build idempotency and setup Ralph Loop foundation (Epic 1).
+- Completed:
+  - Fixed category/tag title multiplication bug in `tools/build.mjs`.
+  - Created `PRD.md` with complete task backlog and acceptance criteria.
+  - Created `progress.txt`.
+- Verification: `node tools/check.mjs` PASSED (74 pages, 148 files).
+- Next: Create `scripts/ralph_loop.sh` & `./ralph.sh`, commit Epic 1.

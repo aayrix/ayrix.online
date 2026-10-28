@@ -50,7 +50,10 @@ for (const file of htmlFiles) {
   const path = '/' + relative(OUT, file).replace(/\\/g, '/');
   let html = await readFile(file, 'utf8');
   const titleMatch = html.match(/<title>([\s\S]*?)<\/title>/i);
-  const title = (titleMatch?.[1] || 'Ayrix').replace(/\s*\|\s*Ayrix\s*$/i, '').replace(/&amp;/g, '&').replace(/AYRIX/g, 'Ayrix').replace('Firstt', 'First').trim();
+  let title = (titleMatch?.[1] || 'Ayrix').replace(/\s*\|\s*Ayrix\s*$/i, '').replace(/^(?:Category|Tag):\s*/gi, '').replace(/&amp;/g, '&').replace(/AYRIX/g, 'Ayrix').replace('Firstt', 'First').trim();
+  while (/^(?:Category|Tag):\s*/i.test(title)) {
+    title = title.replace(/^(?:Category|Tag):\s*/i, '').trim();
+  }
   const canonicalTag = html.match(/<link\b[^>]*rel=["']?canonical["']?[^>]*>/i)?.[0] || '';
   const existingCanonical = canonicalTag.match(/href=["']?([^"' >]+)/i)?.[1]?.replaceAll('aayrix.github.io', 'ayrix.online');
   const initialDescription = html.match(/<meta\s+property="og:description"\s+content="([^"]*)"/i)?.[1]
