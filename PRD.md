@@ -48,10 +48,10 @@ The Ralph Loop pattern (named after Ralph Wiggum by Geoffrey Huntley) achieves c
 - [x] **TASK-404**: Add 3D interactive floating navigation controls / quick status dock.
 
 ### Epic 5: Verification, Contrast, Performance & Static Validation
-- [ ] **TASK-501**: Run `node tools/build.mjs` to regenerate manifest `data/posts.json`, sitemaps, feeds, and updated pages.
-- [ ] **TASK-502**: Run `node tools/check.mjs` to ensure all HTML pages and assets pass static validation.
-- [ ] **TASK-503**: Run `node tools/contrast-check.mjs` to guarantee WCAG AA / AAA contrast across dark and light modes.
-- [ ] **TASK-504**: Verify zero external network requests under strict CSP.
+- [x] **TASK-501**: Run `node tools/build.mjs` to regenerate manifest `data/posts.json`, sitemaps, feeds, and updated pages.
+- [x] **TASK-502**: Run `node tools/check.mjs` to ensure all HTML pages and assets pass static validation.
+- [x] **TASK-503**: Run `node tools/contrast-check.mjs` to guarantee WCAG AA / AAA contrast across dark and light modes.
+- [x] **TASK-504**: Verify zero external network requests under strict CSP.
 
 ---
 
