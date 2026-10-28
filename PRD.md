@@ -53,6 +53,15 @@ The Ralph Loop pattern (named after Ralph Wiggum by Geoffrey Huntley) achieves c
 - [x] **TASK-503**: Run `node tools/contrast-check.mjs` to guarantee WCAG AA / AAA contrast across dark and light modes.
 - [x] **TASK-504**: Verify zero external network requests under strict CSP.
 
+### Epic 6: Full 3D Digital Universe Transformation (Three.js & WebGL)
+- [x] **TASK-601**: Integrate Three.js r186 locally with strict CSP compliance (`default-src 'self'`).
+- [x] **TASK-602**: Create full-viewport persistent WebGL Universe with exponential fog, ACES filmic tone mapping, and physically based multi-directional lighting.
+- [x] **TASK-603**: Build procedural 3D cyber core, gyroscopic gimbal rings, orbiting satellites with laser conduits, and 1,200-particle deep space constellation.
+- [x] **TASK-604**: Implement scroll-driven cinematic camera journey across 3D waypoints and pointer parallax physics with smooth lerp damping.
+- [x] **TASK-605**: Build raycasting-powered 3D spatial navigation nodes with hover scaling, emissive flare, 3D tooltips, and fly-to warp transitions.
+- [x] **TASK-606**: Create interactive 3D Chrono-Orb reading progress beacon on guide pages with dynamic color phase transitions (Cyan -> Violet -> Emerald).
+- [x] **TASK-607**: Verify WebGL rendering across desktop and mobile viewports in headless Chrome without console errors or layout regressions.
+
 ---
 
 ## Machine-Verifiable Acceptance Commands

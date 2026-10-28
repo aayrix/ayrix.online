@@ -48,6 +48,7 @@ const cssParts = [
   'assets/css/ayrix-redesign.css',
   'assets/css/site-overrides.css',
   'assets/css/ayrix-intro.css',
+  'assets/css/ayrix-3d-universe.css',
 ];
 const css = (await Promise.all(cssParts.map(async (part) => {
   try { return await readFile(join(OUT, part), 'utf8'); } catch { return ''; }

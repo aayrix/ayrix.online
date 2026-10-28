@@ -1,80 +1,59 @@
-import { Ayrix3DEngine, initCard3DTilt, initHeader3DParticles } from '/assets/js/ayrix-3d.js';
+import { AyrixUniverse, initCard3DTilt, init3DEntrance } from '/assets/js/ayrix-universe.js';
 
-const introRoot = document.documentElement;
-const intro = document.getElementById('intro');
-
-if (intro) {
-  if (!introRoot.classList.contains('intro-on')) {
-    intro.remove();
-  } else {
-    const pageElements = [...document.body.children].filter((element) => element !== intro);
-    const previousInert = pageElements.map((element) => element.inert);
-    pageElements.forEach((element) => { element.inert = true; });
-
-    const skipButton = intro.querySelector('.intro-skip');
-    let leaving = false;
-    let finished = false;
-    let timer;
-
-    const finish = () => {
-      if (finished) return;
-      finished = true;
-      window.clearTimeout(timer);
-      intro.remove();
-      introRoot.classList.remove('intro-on', 'intro-reveal');
-      pageElements.forEach((element, index) => { element.inert = previousInert[index]; });
-    };
-
-    const leave = () => {
-      if (leaving || finished) return;
-      leaving = true;
-      window.clearTimeout(timer);
-      introRoot.classList.add('intro-reveal');
-      intro.classList.add('leave');
-      const lastPanel = intro.querySelector('.intro-panel--bottom');
-      lastPanel.addEventListener('transitionend', (event) => {
-        if (event.target === lastPanel && event.propertyName === 'transform') finish();
-      }, { once: true });
-      window.setTimeout(finish, 1200);
-    };
-
-    timer = window.setTimeout(leave, 1900);
-    intro.addEventListener('click', leave);
-    skipButton.addEventListener('click', (event) => {
-      event.stopPropagation();
-      leave();
-    });
-    window.addEventListener('keydown', (event) => {
-      if (!leaving && (event.key === 'Escape' || event.key === 'Enter' || event.key === ' ')) {
-        event.preventDefault();
-        leave();
-      }
-    });
-    skipButton.focus({ preventScroll: true });
-  }
+// ----------------------------------------------------
+// 1. 3D Digital Universe Initialization
+// ----------------------------------------------------
+let universe = null;
+try {
+  universe = new AyrixUniverse();
+} catch (e) {
+  console.warn('[Ayrix] Failed to initialize 3D Universe:', e);
 }
 
+// ----------------------------------------------------
+// 2. 3D Entrance Sequence & Skips
+// ----------------------------------------------------
+init3DEntrance();
+
+// ----------------------------------------------------
+// 3. Email Utilities & Haptic Feedback
+// ----------------------------------------------------
 const user = 'aliyanniazi370';
 const host = 'gmail.com';
 const address = `${user}@${host}`;
-document.querySelectorAll('[data-copy-email]').forEach((button) => button.addEventListener('click', async () => {
-  try {
-    await navigator.clipboard.writeText(address);
-    button.textContent = 'Email copied';
-    window.setTimeout(() => { button.textContent = 'Copy email'; }, 1500);
-  } catch { button.textContent = 'Copy unavailable'; }
-}));
-document.querySelectorAll('[data-send-email]').forEach((link) => link.addEventListener('click', (event) => {
-  event.preventDefault();
-  window.location.href = `mailto:${address}`;
-}));
 
+document.querySelectorAll('[data-copy-email]').forEach((button) => {
+  button.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(address);
+      button.textContent = 'Email copied';
+      window.setTimeout(() => { button.textContent = 'Copy email'; }, 1500);
+    } catch {
+      button.textContent = 'Copy unavailable';
+    }
+  });
+});
+
+document.querySelectorAll('[data-send-email]').forEach((link) => {
+  link.addEventListener('click', (event) => {
+    event.preventDefault();
+    window.location.href = `mailto:${address}`;
+  });
+});
+
+// ----------------------------------------------------
+// 4. Secure External Links
+// ----------------------------------------------------
 document.querySelectorAll('a[target="_blank"]').forEach((link) => {
   const rel = new Set((link.getAttribute('rel') || '').split(/\s+/).filter(Boolean));
-  rel.add('noopener'); rel.add('noreferrer');
+  rel.add('noopener');
+  rel.add('noreferrer');
   link.setAttribute('rel', [...rel].join(' '));
 });
 
+// ----------------------------------------------------
+// 5. Code Block Copy Buttons
+// ----------------------------------------------------
 for (const pre of document.querySelectorAll('.post-content pre')) {
   const code = pre.querySelector('code');
   if (!code) continue;
@@ -87,6 +66,7 @@ for (const pre of document.querySelectorAll('.post-content pre')) {
   status.className = 'visually-hidden';
   status.setAttribute('aria-live', 'polite');
   pre.append(button, status);
+
   button.addEventListener('click', async () => {
     try {
       const value = code.innerText.replace(/^\$ /gm, '');
@@ -100,6 +80,9 @@ for (const pre of document.querySelectorAll('.post-content pre')) {
   });
 }
 
+// ----------------------------------------------------
+// 6. Reading Progress Bar (Fallback / Supporting)
+// ----------------------------------------------------
 if (document.querySelector('.post-single')) {
   const progress = document.createElement('div');
   progress.className = 'reading-progress';
@@ -108,6 +91,7 @@ if (document.querySelector('.post-single')) {
   progress.setAttribute('aria-valuemin', '0');
   progress.setAttribute('aria-valuemax', '100');
   document.body.append(progress);
+
   if (!CSS.supports('animation-timeline: scroll()')) {
     const update = () => {
       const doc = document.documentElement;
@@ -120,12 +104,16 @@ if (document.querySelector('.post-single')) {
   }
 }
 
+// ----------------------------------------------------
+// 7. 3D Lightbox for Images
+// ----------------------------------------------------
 const dialog = document.createElement('dialog');
 dialog.className = 'image-lightbox';
 dialog.innerHTML = '<form method="dialog"><button class="lightbox-close" aria-label="Close image">Close</button></form><img alt="">';
 document.body.append(dialog);
 dialog.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
 dialog.querySelector('img').addEventListener('click', () => dialog.close());
+
 document.querySelectorAll('.post-content figure img').forEach((image) => {
   image.tabIndex = 0;
   image.setAttribute('role', 'button');
@@ -138,25 +126,44 @@ document.querySelectorAll('.post-content figure img').forEach((image) => {
     dialog.querySelector('button').focus();
   };
   image.addEventListener('click', open);
-  image.addEventListener('keydown', (event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); open(); } });
+  image.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      open();
+    }
+  });
 });
 
+// ----------------------------------------------------
+// 8. 3D Spatial Search Command Palette
+// ----------------------------------------------------
 let openSearchPalette = null;
 const searchOpeners = document.querySelectorAll('[data-search-open]');
 if (searchOpeners.length) {
   const palette = document.createElement('dialog');
   palette.className = 'search-palette';
   palette.setAttribute('aria-label', 'Search Ayrix guides');
-  palette.innerHTML = '<form method="dialog" class="search-palette__form"><label for="site-search-input">Search guides</label><input id="site-search-input" type="search" autocomplete="off" placeholder="Linux, GitHub, Codex…"><button class="search-close" aria-label="Close search">Close</button></form><p class="visually-hidden" data-search-status aria-live="polite"></p><ul class="search-results" id="site-search-results"></ul>';
+  palette.innerHTML = `
+    <form method="dialog" class="search-palette__form">
+      <label for="site-search-input">3D Universe Search</label>
+      <input id="site-search-input" type="search" autocomplete="off" placeholder="Search Linux, Codex, GitHub, AI coding...">
+      <button class="search-close" aria-label="Close search">Close</button>
+    </form>
+    <p class="visually-hidden" data-search-status aria-live="polite"></p>
+    <ul class="search-results" id="site-search-results"></ul>
+  `;
   document.body.append(palette);
   const input = palette.querySelector('input');
   const results = palette.querySelector('.search-results');
   const status = palette.querySelector('[data-search-status]');
+
   let entries = [];
   let returnFocus = null;
   let activeIndex = -1;
   let loadPromise;
+
   const load = () => loadPromise ||= fetch('/data/posts.json').then((response) => response.ok ? response.json() : []).catch(() => []);
+
   const open = async (trigger) => {
     returnFocus = trigger || document.activeElement;
     palette.showModal();
@@ -165,11 +172,13 @@ if (searchOpeners.length) {
     render(input.value);
   };
   openSearchPalette = open;
+
   const render = (query) => {
     const term = query.trim().toLowerCase();
     const matches = entries.filter((post) => !term || `${post.title} ${post.description} ${post.tags.join(' ')}`.toLowerCase().includes(term)).slice(0, 8);
     results.replaceChildren();
     activeIndex = -1;
+
     for (const post of matches) {
       const item = document.createElement('li');
       const link = document.createElement('a');
@@ -184,6 +193,7 @@ if (searchOpeners.length) {
     }
     status.textContent = matches.length ? `${matches.length} guides found` : 'No guides found';
   };
+
   searchOpeners.forEach((link) => link.addEventListener('click', (event) => { event.preventDefault(); open(link); }));
   input.addEventListener('input', () => render(input.value));
   input.addEventListener('keydown', (event) => {
@@ -194,6 +204,7 @@ if (searchOpeners.length) {
       links[activeIndex]?.focus();
     }
   });
+
   results.addEventListener('keydown', (event) => {
     if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') return;
     event.preventDefault();
@@ -202,7 +213,9 @@ if (searchOpeners.length) {
     const next = (current + (event.key === 'ArrowDown' ? 1 : -1) + links.length) % links.length;
     links[next]?.focus();
   });
+
   palette.addEventListener('close', () => returnFocus?.focus());
+
   document.addEventListener('keydown', (event) => {
     if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k' || event.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) {
       event.preventDefault();
@@ -212,47 +225,13 @@ if (searchOpeners.length) {
 }
 
 // ----------------------------------------------------
-// 3D Website Transformation Core & Interactive Modules
+// 9. Interactive 3D Perspective Tilt on All Cards
 // ----------------------------------------------------
-
-// 1. Mount & Initialize 3D Hero on Homepage
-const homeInfo = document.querySelector('.home-info');
-if (homeInfo && !document.getElementById('hero-3d-canvas')) {
-  const hero3D = document.createElement('div');
-  hero3D.className = 'ayrix-3d-hero';
-  hero3D.id = 'ayrix-3d-hero';
-  hero3D.setAttribute('aria-hidden', 'true');
-  hero3D.innerHTML = `
-    <div class="ayrix-3d-hud">
-      <span class="hud-tag">3D CYBER CORE // ONLINE</span>
-      <span class="hud-hint">DRAG TO ROTATE 3D</span>
-      <span class="hud-coords" data-hud-coords>ROT: 0° / 0°</span>
-    </div>
-    <canvas class="ayrix-3d-canvas" id="hero-3d-canvas"></canvas>
-  `;
-  homeInfo.insertAdjacentElement('afterend', hero3D);
-  const canvas = hero3D.querySelector('#hero-3d-canvas');
-  if (canvas) {
-    new Ayrix3DEngine({ canvas });
-  }
-}
-
-// 2. Mount & Initialize Subtle 3D Ambient Mesh on Post Headers
-const postHeader = document.querySelector('.post-single .post-header');
-if (postHeader && !document.getElementById('header-3d-canvas')) {
-  postHeader.classList.add('header-3d-wrap');
-  const ambientCanvas = document.createElement('canvas');
-  ambientCanvas.id = 'header-3d-canvas';
-  ambientCanvas.className = 'header-3d-canvas';
-  ambientCanvas.setAttribute('aria-hidden', 'true');
-  postHeader.prepend(ambientCanvas);
-  initHeader3DParticles();
-}
-
-// 3. Initialize Interactive CSS 3D Perspective Tilt on All Cards
 initCard3DTilt();
 
-// 4. Mount 3D Tactile Floating Quick Navigation Dock
+// ----------------------------------------------------
+// 10. Mount 3D Tactile Floating Navigation Dock
+// ----------------------------------------------------
 if (!document.querySelector('.floating-3d-dock')) {
   const dock = document.createElement('nav');
   dock.className = 'floating-3d-dock';
@@ -260,6 +239,7 @@ if (!document.querySelector('.floating-3d-dock')) {
   dock.innerHTML = `
     <a href="/"><span aria-hidden="true">✦</span> Home</a>
     <a href="/posts/"><span aria-hidden="true">◈</span> Guides</a>
+    <a href="/categories/"><span aria-hidden="true">⬡</span> Categories</a>
     <button type="button" data-dock-search aria-label="Open Search"><span aria-hidden="true">⌕</span> Search</button>
     <button type="button" data-dock-top aria-label="Scroll to top"><span aria-hidden="true">▲</span> Top</button>
   `;
@@ -277,4 +257,23 @@ if (!document.querySelector('.floating-3d-dock')) {
       window.location.href = '/posts/';
     }
   });
+}
+
+// ----------------------------------------------------
+// 11. Homepage Hero 3D HUD & Drag Stage
+// ----------------------------------------------------
+const homeInfo = document.querySelector('.home-info');
+if (homeInfo && !document.getElementById('ayrix-3d-hero')) {
+  const hero3D = document.createElement('div');
+  hero3D.className = 'ayrix-3d-hero';
+  hero3D.id = 'ayrix-3d-hero';
+  hero3D.setAttribute('aria-label', '3D Technological Sculpture Stage');
+  hero3D.innerHTML = `
+    <div class="ayrix-3d-hud">
+      <span class="hud-tag">3D CYBER CORE // ONLINE</span>
+      <span class="hud-hint">DRAG TO ROTATE SCULPTURE</span>
+      <span class="hud-coords" data-hud-coords>ROT: 0° / 0°</span>
+    </div>
+  `;
+  homeInfo.insertAdjacentElement('afterend', hero3D);
 }
