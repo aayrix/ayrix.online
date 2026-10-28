@@ -99,6 +99,63 @@ img[src*="codex-ubuntu-cli-banner"],img[src*="claude-ubuntu-cli-banner"]{object-
   text-align: center;
 }
 
+/* 3D Entry Cover & Enhanced Photo Formatting */
+.entry-cover-3d {
+  position: relative;
+  margin: 1.6rem 0 3rem;
+  overflow: hidden;
+  border: 1px solid rgba(85, 230, 193, 0.35);
+  border-radius: 16px;
+  background: radial-gradient(circle at 50% 20%, rgba(13, 26, 42, 0.95), #060c14);
+  box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.6), 0 0 30px -8px rgba(85, 230, 193, 0.2);
+  transform-style: preserve-3d;
+  perspective: 1200px;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.entry-cover-3d:hover {
+  transform: translateY(-4px) scale(1.01);
+  border-color: rgba(85, 230, 193, 0.75);
+  box-shadow: 0 30px 65px -12px rgba(0, 0, 0, 0.75), 0 0 45px -5px rgba(85, 230, 193, 0.35);
+}
+
+.entry-cover-3d img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.entry-cover-3d:hover img {
+  transform: scale(1.02);
+}
+
+.entry-cover-3d figcaption {
+  padding: 0.85rem 1.4rem;
+  background: linear-gradient(180deg, rgba(8, 14, 22, 0.85), rgba(5, 9, 15, 0.98));
+  border-top: 1px solid rgba(85, 230, 193, 0.2);
+  color: var(--secondary);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+.post-content figure img,
+.post-content .post-logo img {
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.post-content figure img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.5), 0 0 20px rgba(85, 230, 193, 0.2);
+}
+
 .post-single .post-content hr {
   width: 5rem;
   margin: 3em auto;

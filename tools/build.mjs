@@ -15,9 +15,17 @@ const POST_DESCRIPTIONS = {
   'codex-cli-ubuntu-openai-agent-guide': 'Set up OpenAI Codex CLI on Ubuntu, sign in securely, and run your first coding task.',
 };
 const IMAGE_DIMENSIONS = {
-  'arch-cover': [1536, 1024], 'claude-ubuntu-cli-banner': [686, 608],
-  'codex-ubuntu-cli-banner': [613, 653], 'github-cover': [1536, 1024],
-  'hugo-cover': [1536, 1024], 'ubuntu-cover': [1536, 1024], 'welcome-cover': [1536, 1024],
+  'arch-cover': [1536, 1024],
+  'claude-ubuntu-cli-banner': [686, 608],
+  'codex-ubuntu-cli-banner': [613, 653],
+  'github-cover': [1536, 1024],
+  'hugo-cover': [1536, 1024],
+  'ubuntu-cover': [1536, 1024],
+  'welcome-cover': [1536, 1024],
+  'cursor-ai-cover': [1536, 1024],
+  'my-first-post-cover': [1536, 1024],
+  'codex-cover': [1536, 1024],
+  'github-cli-cover': [1536, 1024],
 };
 
 async function* walk(dir) {

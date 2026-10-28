@@ -13,3 +13,7 @@ Target: Ayrix 3D Technical Publication & Autonomous Ralph Loop
   - Created `progress.txt`.
 - Verification: `node tools/check.mjs` PASSED (74 pages, 148 files).
 - Next: Create `scripts/ralph_loop.sh` & `./ralph.sh`, commit Epic 1.
+
+### Task Completed: TASK-201 [2026-10-28 14:49:44 PKT]
+- Commit Summary: generate bespoke 3D covers and format photos for all guides
+- Verification: build.mjs, check.mjs, contrast-check.mjs PASSED

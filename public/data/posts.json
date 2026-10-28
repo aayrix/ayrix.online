@@ -44,7 +44,7 @@
       "terminal",
       "devtools"
     ],
-    "cover": "images/covers/github-cover.png"
+    "cover": "images/covers/github-cli-cover.png"
   },
   {
     "slug": "hugo-pages-complete-guide",
@@ -105,7 +105,7 @@
       "introduction",
       "blog"
     ],
-    "cover": "images/ayrix-social.svg"
+    "cover": "images/covers/my-first-post-cover.png"
   },
   {
     "slug": "codex-cli-ubuntu-guide",
@@ -121,7 +121,7 @@
       "ai",
       "installation"
     ],
-    "cover": "images/ayrix-social.svg"
+    "cover": "images/covers/codex-cover.png"
   },
   {
     "slug": "cursor-ai-complete-developer-guide",
@@ -137,7 +137,7 @@
       "guide",
       "tutorials"
     ],
-    "cover": "images/covers/welcome-cover.png"
+    "cover": "images/covers/cursor-ai-cover.png"
   },
   {
     "slug": "claude-code-ubuntu-cli-guide",
@@ -153,7 +153,7 @@
       "ai",
       "installation"
     ],
-    "cover": "images/ayrix-social.svg"
+    "cover": "images/covers/claude-ubuntu-cli-banner.png"
   },
   {
     "slug": "codex-cli-ubuntu-openai-agent-guide",
@@ -169,6 +169,6 @@
       "ai",
       "openai"
     ],
-    "cover": "images/ayrix-social.svg"
+    "cover": "images/covers/codex-ubuntu-cli-banner.png"
   }
 ]

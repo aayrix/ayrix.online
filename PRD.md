@@ -22,7 +22,7 @@ The Ralph Loop pattern (named after Ralph Wiggum by Geoffrey Huntley) achieves c
 - [x] **TASK-104**: Create `scripts/ralph_loop.sh` and root `./ralph.sh` runner script with automated check and commit pipeline.
 
 ### Epic 2: Visual Assets & Formatted Photos
-- [ ] **TASK-201**: Generate bespoke, high-resolution 3D-styled covers (`1536x1024` WebP + PNG) for:
+- [x] **TASK-201**: Generate bespoke, high-resolution 3D-styled covers (`1536x1024` WebP + PNG) for:
   - `cursor-ai-complete-developer-guide` (`cursor-ai-cover`)
   - `my-first-post` (`my-first-post-cover`)
   - `codex-cli-ubuntu-guide` (`codex-cover`)
